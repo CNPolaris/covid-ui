@@ -1,5 +1,11 @@
 <template>
   <el-container>
+    <el-header height="61" class="student-header">
+      <el-menu mode="horizontal" class="el-menu-title" :router="true">
+        <el-menu-item index="/">首页</el-menu-item>
+        <el-menu-item index="/">系统介绍</el-menu-item>
+      </el-menu>
+    </el-header>
     <el-main class="student-main">
       <router-view />
     </el-main>
@@ -79,5 +85,8 @@ export default {
 
   .mobile .fixed-header {
     width: 100%;
+  }
+  .student-header {
+    padding: 0!important;
   }
 </style>
