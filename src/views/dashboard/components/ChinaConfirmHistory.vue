@@ -54,7 +54,7 @@ export default {
   methods: {
     async initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-      await getChinaConfirmHistory().then(re=>{
+      await getChinaConfirmHistory().then(re => {
         this.date = re.date
         this.confirmed = re.confirmed
         this.cured = re.cured

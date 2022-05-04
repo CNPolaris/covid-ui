@@ -80,6 +80,18 @@ export const constantRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
         meta: { title: '首页', icon: 'dashboard', affix: true }
+      },
+      {
+        path: '/china',
+        component: () => import('@/views/china/index'),
+        name: 'China',
+        meta: { title: '中国趋势' }
+      },
+      {
+        path: '/province',
+        component: () => import('@/views/province/index'),
+        name: 'Province',
+        meta: { title: '省市趋势' }
       }
     ]
   },

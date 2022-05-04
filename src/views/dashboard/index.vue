@@ -1,47 +1,47 @@
 <template>
   <div class="app-container">
     <el-col :span="18">
-        <el-row :gutter="40" class="panel-group">
-          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
-            <div class="card-panel">
-              <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
-              </div>
-              <div class="card-panel-description">
-                <div class="card-panel-text">
-                  全国累计确诊
-                </div>
-                <count-to v-loading="loading" :start-val="0" :end-val="confirmedCount" :duration="2600" class="card-panel-num" />
-              </div>
+      <el-row :gutter="40" class="panel-group">
+        <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper">
+              <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
             </div>
-          </el-col>
-          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
-            <div class="card-panel">
-              <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
+            <div class="card-panel-description">
+              <div class="card-panel-text">
+                全国累计确诊
               </div>
-              <div class="card-panel-description">
-                <div class="card-panel-text">
-                  全国累计死亡病例
-                </div>
-                <count-to v-loading="loading" :start-val="0" :end-val="deadCount" :duration="2600" class="card-panel-num" />
-              </div>
+              <count-to v-loading="loading" :start-val="0" :end-val="confirmedCount" :duration="2600" class="card-panel-num" />
             </div>
-          </el-col>
-          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
-            <div class="card-panel">
-              <div class="card-panel-icon-wrapper">
-                <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
-              </div>
-              <div class="card-panel-description">
-                <div class="card-panel-text">
-                  全国累计治愈
-                </div>
-                <count-to v-loading="loading" :start-val="0" :end-val="curedCount" :duration="2600" class="card-panel-num" />
-              </div>
+          </div>
+        </el-col>
+        <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper">
+              <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
             </div>
-          </el-col>
-        </el-row>
+            <div class="card-panel-description">
+              <div class="card-panel-text">
+                全国累计死亡病例
+              </div>
+              <count-to v-loading="loading" :start-val="0" :end-val="deadCount" :duration="2600" class="card-panel-num" />
+            </div>
+          </div>
+        </el-col>
+        <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper">
+              <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
+            </div>
+            <div class="card-panel-description">
+              <div class="card-panel-text">
+                全国累计治愈
+              </div>
+              <count-to v-loading="loading" :start-val="0" :end-val="curedCount" :duration="2600" class="card-panel-num" />
+            </div>
+          </div>
+        </el-col>
+      </el-row>
       <el-row :gutter="40">
         <el-col :span="12" class="chart-wrapper">
           <province-daily />
@@ -68,7 +68,7 @@
             累计死亡:{{ provinceDead }}
           </li>
           <li>
-            昨日新增：{{ dailyData.currentConfirmedCount}}
+            昨日新增：{{ dailyData.currentConfirmedCount }}
           </li>
           <li>
             高风险地区：{{ dailyData.highDangerCount }}
@@ -103,10 +103,14 @@ export default {
       confirmedCount: 0,
       curedCount: 0,
       deadCount: 0,
-      queryPram:{
+      queryPram: {
         provinceCode: 'JS'
       },
-      dailyData: null,
+      dailyData: {
+        currentConfirmedCount: 0,
+        highDangerCount: 0,
+        midDangerCount: 0
+      },
       provinceConfirmed: 0,
       provinceCured: 0,
       provinceDead: 0,
