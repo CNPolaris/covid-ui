@@ -5,7 +5,7 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons')
-import { getProvinceDailyData } from '@/api/province'
+import { getProvinceDailyData } from '@/api/china'
 
 export default {
   name: 'ProvinceDaily',
@@ -64,7 +64,7 @@ export default {
       this.chart.setOption({
         title: {
           text: '昨日各省疫情',
-          left: 'center'
+          left: 'left'
         },
         tooltip: {
           trigger: 'axis',
