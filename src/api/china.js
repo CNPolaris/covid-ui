@@ -20,3 +20,11 @@ export function getChinaConfirmHistory() {
     method: 'get'
   })
 }
+
+export function getYourAddressInfo(provinceCode) {
+  return request({
+    url: '/charts/address',
+    method: 'get',
+    params: provinceCode
+  })
+}
