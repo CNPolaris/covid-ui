@@ -18,7 +18,7 @@
         <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
           <div class="card-panel">
             <div class="card-panel-icon-wrapper">
-              <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
+              <svg-icon icon-class="dead" class-name="card-panel-icon" />
             </div>
             <div class="card-panel-description">
               <div class="card-panel-text">
@@ -31,7 +31,7 @@
         <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
           <div class="card-panel">
             <div class="card-panel-icon-wrapper">
-              <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
+              <svg-icon icon-class="cure" class-name="card-panel-icon" />
             </div>
             <div class="card-panel-description">
               <div class="card-panel-text">

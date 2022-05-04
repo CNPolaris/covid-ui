@@ -28,3 +28,10 @@ export function getYourAddressInfo(provinceCode) {
     params: provinceCode
   })
 }
+
+export function getChinaAll() {
+  return request({
+    url: '/charts/china/all',
+    method: 'get'
+  })
+}
