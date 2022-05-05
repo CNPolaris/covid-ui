@@ -68,6 +68,10 @@ export default {
         tooltip: {
           trigger: 'axis'
         },
+        legend: {
+          left: 'right',
+          data: ['累计确诊','累计死亡']
+        },
         grid: {
           left: '3%',
           right: '4%',

@@ -88,6 +88,10 @@ export default {
             }
           }
         },
+        legend: {
+          left: 'right',
+          data: ['累计确诊','累计治愈','累计死亡','治愈率','死亡率','现存确诊','新增确诊','新增死亡',]
+        },
         xAxis: {
           type: 'category',
           boundaryGap: false,

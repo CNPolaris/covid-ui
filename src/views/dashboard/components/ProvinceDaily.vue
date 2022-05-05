@@ -73,7 +73,8 @@ export default {
           }
         },
         legend: {
-          left: 'right'
+          left: 'right',
+          data: ['确诊人数','痊愈人数','死亡人数']
         },
         grid: {
           left: '3%',

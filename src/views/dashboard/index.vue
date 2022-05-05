@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-editor-container">
     <el-row :gutter="20">
-      <el-col :span="18">
+      <el-col :xs="24" :sm="24" :lg="18">
         <el-row :gutter="20" class="panel-group">
           <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
             <div class="card-panel">
@@ -10,9 +10,35 @@
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
-                  全国累计确诊
+                  累计确诊
                 </div>
-                <count-to v-loading="loading" :start-val="0" :end-val="confirmedCount" :duration="2600" class="card-panel-num" />
+                <count-to v-loading="loading" :start-val="0" :end-val="desc.confirmedCount" :duration="2600" class="card-panel-num" />
+              </div>
+            </div>
+          </el-col>
+          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+            <div class="card-panel">
+              <div class="card-panel-icon-wrapper">
+                <svg-icon icon-class="confirmedIncr" class-name="card-panel-icon" />
+              </div>
+              <div class="card-panel-description">
+                <div class="card-panel-text">
+                  现有确诊
+                </div>
+                <count-to v-loading="loading" :start-val="0" :end-val="desc.currentConfirmedCount" :duration="2600" class="card-panel-num" />
+              </div>
+            </div>
+          </el-col>
+          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+            <div class="card-panel">
+              <div class="card-panel-icon-wrapper">
+                <svg-icon icon-class="serious" class-name="card-panel-icon" />
+              </div>
+              <div class="card-panel-description">
+                <div class="card-panel-text">
+                  重症病例
+                </div>
+                <count-to v-loading="loading" :start-val="0" :end-val="desc.seriousCount" :duration="2600" class="card-panel-num" />
               </div>
             </div>
           </el-col>
@@ -23,9 +49,9 @@
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
-                  全国累计死亡病例
+                  累计死亡
                 </div>
-                <count-to v-loading="loading" :start-val="0" :end-val="deadCount" :duration="2600" class="card-panel-num" />
+                <count-to v-loading="loading" :start-val="0" :end-val="desc.deadCount" :duration="2600" class="card-panel-num" />
               </div>
             </div>
           </el-col>
@@ -36,9 +62,22 @@
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
-                  全国累计治愈
+                  累计治愈
                 </div>
-                <count-to v-loading="loading" :start-val="0" :end-val="curedCount" :duration="2600" class="card-panel-num" />
+                <count-to v-loading="loading" :start-val="0" :end-val="desc.curedCount" :duration="2600" class="card-panel-num" />
+              </div>
+            </div>
+          </el-col>
+          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+            <div class="card-panel">
+              <div class="card-panel-icon-wrapper">
+                <svg-icon icon-class="curedIncr" class-name="card-panel-icon" />
+              </div>
+              <div class="card-panel-description">
+                <div class="card-panel-text">
+                  新增治愈
+                </div>
+                <count-to v-loading="loading" :start-val="0" :end-val="desc.curedIncr" :duration="2600" class="card-panel-num" />
               </div>
             </div>
           </el-col>
@@ -55,6 +94,13 @@
             </div>
           </el-col>
         </el-row>
+        <el-row>
+          <el-col :xs="24" :sm="24" :lg="24">
+            <div class="chart-wrapper">
+              <ChinaDailyAdd />
+            </div>
+          </el-col>
+        </el-row>
         <el-row :gutter="40" style="margin-top: 10px">
           <el-col :xs="24" :sm="24" :lg="24">
             <div class="chart-wrapper">
@@ -63,15 +109,15 @@
           </el-col>
         </el-row>
       </el-col>
-      <el-col :lg="6" style="background: #fff">
+      <el-col :xs="24" :sm="24" :lg="6">
         <el-form :inline="true">
           <el-form-item label="当前省份">
-            <el-select v-model="queryPram.provinceCode">
+            <el-select v-model="queryPram.provinceCode" @change="getAddress">
               <el-option v-for="item in provinces" :key="item.key" :value="item.key" :label="item.value" />
             </el-select>
           </el-form-item>
         </el-form>
-        <el-row>
+        <el-row style="background: #fff; margin-top: 10px">
           <ul>
             <li>
               <h4 style="font-size: 14px">
@@ -90,23 +136,36 @@
             </li>
           </ul>
         </el-row>
-        <el-row>
-          <h3>
-            疫情资讯
-          </h3>
-          <div v-for="item in news" :key="item.id">
-            <h4>
-              <a @click="sourceNew(item.sourceUrl)" style="font-size: 14px">{{ item.title }}</a>
-            </h4>
+        <el-row style="background: #fff; margin-top: 10px;">
+          <div style="margin-left: 10px">
+            <h3>
+              疫情资讯
+            </h3>
+            <div v-for="item in news" :key="item.id">
+              <h4>
+                <a @click="sourceNew(item.sourceUrl)" style="font-size: 14px">{{ item.title }}</a>
+              </h4>
+            </div>
           </div>
         </el-row>
-        <el-row>
-          <h3 style="color: #ef5610">
-            高风险地区
-          </h3>
-          <div v-for="(item,index) in riskarea.high" :key="index">
-            <a style="font-size: 14px">{{ item }}</a>
+        <el-row style="background: #fff; margin-top: 10px">
+          <div style="margin-left: 10px">
+            <h3 style="color: #ef5610">
+              高风险地区
+            </h3>
+            <div v-for="(item,index) in riskarea.high" :key="index">
+              <a style="font-size: 14px">{{ item }}</a>
+            </div>
           </div>
+        </el-row>
+        <el-row style="margin-top: 10px">
+          <h3>较昨日各省市疫情变化</h3>
+          <el-table :data="provinceCompareList" max-height="840">
+            <el-table-column prop="name" label="省市" />
+            <el-table-column prop="add" label="新增确诊" />
+            <el-table-column prop="dead" label="新增死亡" />
+            <el-table-column prop="heal" label="新增治愈" />
+          </el-table>
         </el-row>
       </el-col>
     </el-row>
@@ -119,12 +178,13 @@ import { mapGetters } from 'vuex'
 import ProvinceDaily from '@/views/dashboard/components/ProvinceDaily'
 import ChinaConfirmHistory from '@/views/dashboard/components/ChinaConfirmHistory'
 import ChinaMap from '@/views/dashboard/components/ChinaMap'
-import { getChinaCumulateInfo, getYourAddressInfo, getNewsList } from '@/api/china'
+import ChinaDailyAdd from '@/views/dashboard/components/ChinaDailyAdd'
+import { getChinaCumulateInfo, getYourAddressInfo, getNewsList, getChinaDailyList } from '@/api/china'
 
 export default {
   name: 'Dashboard',
   components: {
-    CountTo, ProvinceDaily, ChinaConfirmHistory, ChinaMap
+    CountTo, ProvinceDaily, ChinaConfirmHistory, ChinaMap, ChinaDailyAdd
   },
   data() {
     return {
@@ -183,7 +243,19 @@ export default {
       riskarea: {
         high: [],
         mid: []
-      }
+      },
+      desc: {
+        confirmedCount: 0,
+        confirmedIncr: 0,
+        curedCount: 0,
+        curedIncr: 0,
+        currentConfirmedCount: 0,
+        currentConfirmedIncr: 0,
+        deadCount: 0,
+        deadIncr: 0,
+        seriousCount: 0
+      },
+      provinceCompareList: []
     }
   },
   computed: {
@@ -194,20 +266,32 @@ export default {
   created() {
     getChinaCumulateInfo().then(re => {
       this.confirmedCount = re.confirmedCount
-      this.curedCount = re.cureCount
+      this.curedCount = re.curedCount
       this.deadCount = re.deadCount
     })
-    getYourAddressInfo(this.queryPram).then(re => {
-      this.provinceConfirmed = re.provinceConfirmed
-      this.provinceDead = re.provinceDead
-      this.dailyData = re.dailyData
-    })
+    this.getAddress()
     getNewsList().then(re => {
+      this.desc = re.newslist[0].desc
       this.news = re.newslist[0].news
       this.riskarea = re.newslist[0].riskarea
     })
+    this.getChinaDaily()
   },
   methods: {
+    getAddress() {
+      getYourAddressInfo(this.queryPram).then(re => {
+        this.provinceConfirmed = re.provinceConfirmed
+        this.provinceDead = re.provinceDead
+        this.dailyData = re.dailyData
+      })
+    },
+    getChinaDaily() {
+      getChinaDailyList().then(re => {
+        for( let item in re.data.provinceCompare){
+          this.provinceCompareList.push({name:item,add: re.data.provinceCompare[item].confirmAdd, dead:re.data.provinceCompare[item].dead, heal:re.data.provinceCompare[item].heal })
+        }
+      })
+    },
     sourceNew(url) {
       window.open(url,'_blank')
     }

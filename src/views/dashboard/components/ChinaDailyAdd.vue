@@ -5,10 +5,10 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons')
-import { getChinaConfirmHistory } from '@/api/china'
+import { getChinaDailyList } from '@/api/china'
 
 export default {
-  name: 'ChinaConfirmHistory',
+  name: 'ChinaDailyAdd',
   props: {
     className: {
       type: String,
@@ -29,11 +29,8 @@ export default {
   },
   data() {
     return {
-      chart: null,
       date: [],
-      confirmed: [],
-      cured: [],
-      dead: []
+      confirmed: []
     }
   },
   mounted() {
@@ -54,16 +51,16 @@ export default {
   methods: {
     async initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-      await getChinaConfirmHistory().then(re => {
-        this.date = re.date
-        this.confirmed = re.confirmed
-        this.cured = re.cured
-        this.dead = re.dead
+      const _this = this
+      await getChinaDailyList().then(re => {
+        for(let item of re.data.chinaDayAddList){
+          this.date.push(item.date)
+          this.confirmed.push(item.confirm)
+        }
       })
       this.chart.setOption({
         title: {
-          text: '全国近30天疫情趋势',
-          left: 'left'
+          text: '近期全国新增病例趋势'
         },
         tooltip: {
           trigger: 'axis',
@@ -74,16 +71,6 @@ export default {
             }
           }
         },
-        legend:{
-          left: 'right',
-          data: ['累计确诊','累计治愈','累计死亡']
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
         xAxis: {
           type: 'category',
           boundaryGap: false,
@@ -92,30 +79,17 @@ export default {
             type: 'shadow'
           }
         },
-        yAxis: [
-          {
-            type: 'value'
-          },
-          {
-            type: 'value'
-          }
-        ],
+        yAxis: {
+          type: 'value'
+        },
+        legend: {
+          data: ['本土新增确诊']
+        },
         series: [
           {
-            name: '累计确诊',
-            type: 'bar',
-            data: this.confirmed
-          },
-          {
-            name: '累计治愈',
-            stack: 'Total',
-            type: 'bar',
-            data: this.cured
-          },
-          {
-            name: '累计死亡',
+            name: '新增确诊',
             type: 'line',
-            data: this.dead,
+            data: this.confirmed
           }
         ]
       })
@@ -123,7 +97,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

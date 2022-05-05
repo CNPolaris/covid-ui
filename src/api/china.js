@@ -75,3 +75,10 @@ export function getNewsList() {
     }
   })
 }
+
+export function getChinaDailyList() {
+  return request({
+    url: 'https://api.inews.qq.com/newsqa/v1/query/inner/publish/modules/list?modules=chinaDayList,chinaDayAddList,nowConfirmStatis,provinceCompare',
+    method: 'post'
+  })
+}
