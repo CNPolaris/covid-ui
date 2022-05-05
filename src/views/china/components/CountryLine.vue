@@ -82,12 +82,6 @@ export default {
         tooltip: {
           trigger: 'axis'
         },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
         xAxis: {
           type: 'category',
           boundaryGap: false,
@@ -101,30 +95,29 @@ export default {
             name: '累计确诊',
             data: this.confirmedCount,
             stack: 'Total',
-            type: 'line'
+            type: 'bar'
           },
           {
             name: '累计治愈',
             data: this.curedCount,
             stack: 'Total',
-            type: 'line'
+            type: 'bar'
           },
           {
             name: '累计死亡',
             data: this.deadCount,
             stack: 'Total',
-            type: 'line'
+            type: 'bar'
           },
           {
             name: '治愈率',
             data: this.curedRate,
-            stack: 'Total',
             type: 'line'
           },
           {
             name: '死亡率',
             data: this.deadRate,
-            stack: 'Total',
+            smooth: true,
             type: 'line'
           },
           {

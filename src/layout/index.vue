@@ -1,12 +1,12 @@
 <template>
   <el-container>
     <el-header height="61" class="student-header">
-      <el-menu mode="horizontal" class="el-menu-title" :router="true">
-        <el-menu-item index="/">首页</el-menu-item>
-        <el-menu-item index="/introduction">系统介绍</el-menu-item>
-        <el-menu-item index="/china">中国趋势</el-menu-item>
-        <el-menu-item index="/province">省市趋势</el-menu-item>
-      </el-menu>
+    <el-menu mode="horizontal" class="el-menu-title" :router="true">
+      <el-menu-item index="/">首页</el-menu-item>
+      <el-menu-item index="/introduction">系统介绍</el-menu-item>
+      <el-menu-item index="/china">中国趋势</el-menu-item>
+      <el-menu-item index="/province">省市趋势</el-menu-item>
+    </el-menu>
     </el-header>
     <el-main class="student-main">
       <router-view />

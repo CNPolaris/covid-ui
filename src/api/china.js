@@ -35,3 +35,25 @@ export function getChinaAll() {
     method: 'get'
   })
 }
+
+export function getProvinceDaily(code) {
+  return request({
+    url: '/charts/china/province',
+    method: 'get',
+    params: code
+  })
+}
+
+export function getProvinceCompare() {
+  return request({
+    url: '/charts/china/province/compare',
+    method: 'get',
+  })
+}
+
+export function getProvinceAll() {
+  return request({
+    url: '/charts/china/province/all',
+    method: 'get',
+  })
+}

@@ -4,16 +4,24 @@
       <el-col :span="12">
         <country-line />
       </el-col>
+      <el-col :span="12">
+        <JSProvinceDaily />
+      </el-col>
+    </el-row>
+    <el-row>
+      <province-compare />
     </el-row>
   </div>
 </template>
 
 <script>
 import CountryLine from '@/views/china/components/CountryLine'
+import JSProvinceDaily from '@/views/china/components/JSProvinceDaily'
+import ProvinceCompare from '@/views/china/components/ProvinceCompare'
 export default {
   name: 'China',
   components: {
-    CountryLine
+    CountryLine, JSProvinceDaily, ProvinceCompare
   }
 }
 </script>
