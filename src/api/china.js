@@ -57,3 +57,10 @@ export function getProvinceAll() {
     method: 'get',
   })
 }
+
+export function getProvinceCurrent() {
+  return request({
+    url: '/charts/china/province/current',
+    method: 'get',
+  })
+}

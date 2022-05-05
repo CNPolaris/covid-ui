@@ -50,6 +50,9 @@
           <china-confirm-history />
         </el-col>
       </el-row>
+      <el-row :gutter="40" style="margin-top: 10px">
+        <china-map />
+      </el-row>
     </el-col>
     <el-col :span="6">
       <el-form :inline="true">
@@ -90,12 +93,13 @@ import CountTo from 'vue-count-to'
 import { mapGetters } from 'vuex'
 import ProvinceDaily from '@/views/dashboard/components/ProvinceDaily'
 import ChinaConfirmHistory from '@/views/dashboard/components/ChinaConfirmHistory'
+import ChinaMap from '@/views/dashboard/components/ChinaMap'
 import { getChinaCumulateInfo, getYourAddressInfo } from '@/api/china'
 
 export default {
   name: 'Dashboard',
   components: {
-    CountTo, ProvinceDaily, ChinaConfirmHistory
+    CountTo, ProvinceDaily, ChinaConfirmHistory, ChinaMap
   },
   data() {
     return {

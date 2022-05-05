@@ -11,6 +11,9 @@
     <el-row>
       <province-compare />
     </el-row>
+    <el-row>
+      <china-map />
+    </el-row>
   </div>
 </template>
 
@@ -18,9 +21,11 @@
 import CountryLine from '@/views/china/components/CountryLine'
 import JSProvinceDaily from '@/views/china/components/JSProvinceDaily'
 import ProvinceCompare from '@/views/china/components/ProvinceCompare'
+import ChinaMap from '@/views/dashboard/components/ChinaMap'
 export default {
   name: 'China',
   components: {
+    ChinaMap,
     CountryLine, JSProvinceDaily, ProvinceCompare
   }
 }
