@@ -1,18 +1,30 @@
 <template>
-  <div class="app-container">
-    <el-row>
-      <el-col :span="12">
-        <country-line />
+  <div class="dashboard-editor-container">
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div class="chart-wrapper">
+          <country-line />
+        </div>
       </el-col>
-      <el-col :span="12">
-        <JSProvinceDaily />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div class="chart-wrapper">
+          <JSProvinceDaily />
+        </div>
       </el-col>
     </el-row>
     <el-row>
-      <province-compare />
+      <el-col :xs="24" :sm="24" :lg="24">
+        <div class="chart-wrapper">
+          <province-compare />
+        </div>
+      </el-col>
     </el-row>
     <el-row>
-      <china-map />
+      <el-col :xs="24" :sm="24" :lg="24">
+        <div  class="chart-wrapper">
+          <china-map />
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -31,6 +43,30 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.dashboard-editor-container {
+  padding: 32px;
+  background-color: rgb(240, 242, 245);
+  position: relative;
 
+  .github-corner {
+    position: absolute;
+    top: 0px;
+    border: 0;
+    right: 0;
+  }
+
+  .chart-wrapper {
+    background: #fff;
+    padding: 16px 16px 0;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width:1024px) {
+  .chart-wrapper {
+    padding: 8px;
+  }
+}
 </style>
+

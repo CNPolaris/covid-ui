@@ -1,139 +1,139 @@
 <template>
-  <div class="app-container">
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-XG" style="width: 100%; height: 300px" />
+  <div class="dashboard-editor-container">
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-XG" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-TW" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-HLJ" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-QH" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-TW" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-SX" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-HLJ" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-CQ" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-LN" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-GZ" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-QH" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-XZ" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-SX" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-FJ" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-GS" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-AM" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-CQ" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-HN" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-LN" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-HB" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-HN-2" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-ZJ" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-GZ" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-HN-1" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-XZ" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-HB-1" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-JX" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-JS" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-FJ" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-XJ" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-GS" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-GX" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-GD" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-SX-1" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-AM" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-SD" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-HN" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-AH" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-NX" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-TJ" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-HB" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-SC" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-HN-2" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-JL" style="width: 100%; height: 300px" />
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-BJ" style="width: 100%; height: 300px" />
-      </el-col>
-      <el-col :span="12">
-        <div id="charts-NMG" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-ZJ" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="12">
-        <div id="charts-YN" style="width: 100%; height: 300px" />
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-HN-1" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
-      <el-col :span="12">
-        <div id="charts-SH" style="width: 100%; height: 300px" />
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-HB-1" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-JX" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-JS" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-XJ" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-GX" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-GD" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-SX-1" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-SD" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-AH" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-NX" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-TJ" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-SC" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-JL" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-BJ" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-NMG" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-YN" style="width: 100%; height: 300px" class="chart-wrapper" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div id="charts-SH" style="width: 100%; height: 300px" class="chart-wrapper" />
       </el-col>
     </el-row>
   </div>
@@ -367,7 +367,13 @@ export default {
           left: 'left'
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
+            }
+          }
         },
         xAxis: {
           type: 'category',
@@ -381,44 +387,64 @@ export default {
           top: 30,
           containLabel: true
         },
-        yAxis: {
-          type: 'value'
-        },
+        yAxis: [
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          }
+        ],
         series: [
           {
             name: '累计确诊',
-            data: this.confirmedCount,
-            type: 'line'
+            type: 'line',
+            data: this.confirmedCount
           },
           {
             name: '新增确诊',
-            data: this.confirmedIncreased,
-            type: 'line'
+            type: 'line',
+            data: this.confirmedIncreased
           },
           {
             name: '累计死亡',
-            data: this.deadCount,
-            type: 'line'
+            type: 'bar',
+            data: this.deadCount
           },
           {
             name: '新增死亡',
-            data: this.deadIncreased,
-            type: 'line'
+            type: 'line',
+            data: this.deadIncreased
           },
           {
             name: '死亡率',
-            data: this.deadRate,
-            type: 'line'
+            type: 'line',
+            data: this.deadRate
           },
           {
             name: '治愈率',
-            data: this.curedRate,
-            type: 'line'
+            type: 'line',
+            data: this.curedRate
           },
           {
             name: '治愈病例',
-            data: this.curedCount,
-            type: 'line'
+            type: 'line',
+            data: this.curedCount
           }
         ]
       }
@@ -427,6 +453,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.dashboard-editor-container {
+  padding: 32px;
+  background-color: rgb(240, 242, 245);
+  position: relative;
 
+  .github-corner {
+    position: absolute;
+    top: 0px;
+    border: 0;
+    right: 0;
+  }
+
+  .chart-wrapper {
+    background: #fff;
+    padding: 16px 16px 0;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width:1024px) {
+  .chart-wrapper {
+    padding: 8px;
+  }
+}
 </style>

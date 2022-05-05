@@ -57,7 +57,8 @@ export default {
       })
       this.chart.setOption({
         title: {
-          text: '全国新冠疫情'
+          text: '全国新冠疫情地理热力图',
+          left: 'center'
         },
         tooltip: {
           trigger: 'item',

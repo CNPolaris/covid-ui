@@ -66,7 +66,13 @@ export default {
           left: 'center'
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
+            }
+          }
         },
         grid: {
           left: '3%',
@@ -77,29 +83,35 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: this.date
+          data: this.date,
+          axisPointer: {
+            type: 'shadow'
+          }
         },
-        yAxis: {
-          type: 'value'
-        },
+        yAxis: [
+          {
+            type: 'value'
+          },
+          {
+            type: 'value'
+          }
+        ],
         series: [
           {
             name: '累计确诊',
-            data: this.confirmed,
-            stack: 'Total',
-            type: 'line'
+            type: 'bar',
+            data: this.confirmed
           },
           {
             name: '累计治愈',
-            data: this.cured,
             stack: 'Total',
-            type: 'line'
+            type: 'bar',
+            data: this.cured
           },
           {
             name: '累计死亡',
+            type: 'line',
             data: this.dead,
-            stack: 'Total',
-            type: 'line'
           }
         ]
       })

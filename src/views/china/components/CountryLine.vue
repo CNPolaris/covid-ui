@@ -80,63 +80,88 @@ export default {
           left: 'left'
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
+            }
+          }
         },
         xAxis: {
           type: 'category',
           boundaryGap: false,
           data: this.updateTime
         },
-        yAxis: {
-          type: 'value'
-        },
+        yAxis: [
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          },
+          {
+            type: 'value',
+          }
+        ],
         series: [
           {
             name: '累计确诊',
-            data: this.confirmedCount,
-            stack: 'Total',
-            type: 'bar'
+            type: 'bar',
+            data: this.confirmedCount
           },
           {
             name: '累计治愈',
-            data: this.curedCount,
-            stack: 'Total',
-            type: 'bar'
+            type: 'bar',
+            data: this.curedCount
           },
           {
             name: '累计死亡',
-            data: this.deadCount,
-            stack: 'Total',
-            type: 'bar'
+            type: 'bar',
+            backgroundStyle: {
+              color: "rgba(180, 180, 180, 0.2)"
+            },
+            data: this.deadCount
           },
           {
             name: '治愈率',
-            data: this.curedRate,
-            type: 'line'
+            type: 'line',
+            data: this.curedRate
           },
           {
             name: '死亡率',
-            data: this.deadRate,
-            smooth: true,
-            type: 'line'
+            type: 'line',
+            data: this.deadRate
           },
           {
             name: '现存确诊',
-            data: this.insickCount,
-            stack: 'Total',
-            type: 'line'
+            type: 'line',
+            data: this.insickCount
           },
           {
             name: '新增确诊',
-            data: this.confirmedIncreased,
-            stack: 'Total',
-            type: 'line'
+            type: 'line',
+            data: this.confirmedIncreased
           },
           {
             name: '新增死亡',
-            data: this.deadIncreased,
-            stack: 'Total',
-            type: 'line'
+            type: 'line',
+            data: this.deadIncreased
           }
         ]
       })

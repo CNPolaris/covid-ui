@@ -1,90 +1,115 @@
 <template>
-  <div class="app-container">
-    <el-col :span="18">
-      <el-row :gutter="40" class="panel-group">
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-          <div class="card-panel">
-            <div class="card-panel-icon-wrapper">
-              <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
-            </div>
-            <div class="card-panel-description">
-              <div class="card-panel-text">
-                全国累计确诊
+  <div class="dashboard-editor-container">
+    <el-row :gutter="20">
+      <el-col :span="18">
+        <el-row :gutter="20" class="panel-group">
+          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+            <div class="card-panel">
+              <div class="card-panel-icon-wrapper">
+                <svg-icon icon-class="confirmed" class-name="card-panel-icon" />
               </div>
-              <count-to v-loading="loading" :start-val="0" :end-val="confirmedCount" :duration="2600" class="card-panel-num" />
-            </div>
-          </div>
-        </el-col>
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-          <div class="card-panel">
-            <div class="card-panel-icon-wrapper">
-              <svg-icon icon-class="dead" class-name="card-panel-icon" />
-            </div>
-            <div class="card-panel-description">
-              <div class="card-panel-text">
-                全国累计死亡病例
+              <div class="card-panel-description">
+                <div class="card-panel-text">
+                  全国累计确诊
+                </div>
+                <count-to v-loading="loading" :start-val="0" :end-val="confirmedCount" :duration="2600" class="card-panel-num" />
               </div>
-              <count-to v-loading="loading" :start-val="0" :end-val="deadCount" :duration="2600" class="card-panel-num" />
             </div>
-          </div>
-        </el-col>
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-          <div class="card-panel">
-            <div class="card-panel-icon-wrapper">
-              <svg-icon icon-class="cure" class-name="card-panel-icon" />
-            </div>
-            <div class="card-panel-description">
-              <div class="card-panel-text">
-                全国累计治愈
+          </el-col>
+          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+            <div class="card-panel">
+              <div class="card-panel-icon-wrapper">
+                <svg-icon icon-class="dead" class-name="card-panel-icon" />
               </div>
-              <count-to v-loading="loading" :start-val="0" :end-val="curedCount" :duration="2600" class="card-panel-num" />
+              <div class="card-panel-description">
+                <div class="card-panel-text">
+                  全国累计死亡病例
+                </div>
+                <count-to v-loading="loading" :start-val="0" :end-val="deadCount" :duration="2600" class="card-panel-num" />
+              </div>
             </div>
+          </el-col>
+          <el-col :xs="12" :sm="12" :lg="8" class="card-panel-col">
+            <div class="card-panel">
+              <div class="card-panel-icon-wrapper">
+                <svg-icon icon-class="cure" class-name="card-panel-icon" />
+              </div>
+              <div class="card-panel-description">
+                <div class="card-panel-text">
+                  全国累计治愈
+                </div>
+                <count-to v-loading="loading" :start-val="0" :end-val="curedCount" :duration="2600" class="card-panel-num" />
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :xs="24" :sm="24" :lg="12">
+            <div class="chart-wrapper">
+              <province-daily />
+            </div>
+          </el-col>
+          <el-col :xs="24" :sm="24" :lg="12">
+            <div class="chart-wrapper">
+              <china-confirm-history />
+            </div>
+          </el-col>
+        </el-row>
+        <el-row :gutter="40" style="margin-top: 10px">
+          <el-col :xs="24" :sm="24" :lg="24">
+            <div class="chart-wrapper">
+              <china-map />
+            </div>
+          </el-col>
+        </el-row>
+      </el-col>
+      <el-col :lg="6" style="background: #fff">
+        <el-form :inline="true">
+          <el-form-item label="当前省份">
+            <el-select v-model="queryPram.provinceCode">
+              <el-option v-for="item in provinces" :key="item.key" :value="item.key" :label="item.value" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <el-row>
+          <ul>
+            <li>
+              <h4 style="font-size: 14px">
+                累计确诊:{{ provinceConfirmed }}
+              </h4>
+            </li>
+            <li>
+              <h4 style="font-size: 14px">
+                累计死亡:{{ provinceDead }}
+              </h4>
+            </li>
+            <li>
+              <h4 style="font-size: 14px">
+                昨日新增：{{ dailyData.currentConfirmedCount }}
+              </h4>
+            </li>
+          </ul>
+        </el-row>
+        <el-row>
+          <h3>
+            疫情资讯
+          </h3>
+          <div v-for="item in news" :key="item.id">
+            <h4>
+              <a @click="sourceNew(item.sourceUrl)" style="font-size: 14px">{{ item.title }}</a>
+            </h4>
           </div>
-        </el-col>
-      </el-row>
-      <el-row :gutter="40">
-        <el-col :span="12" class="chart-wrapper">
-          <province-daily />
-        </el-col>
-        <el-col :span="12" class="chart-wrapper">
-          <china-confirm-history />
-        </el-col>
-      </el-row>
-      <el-row :gutter="40" style="margin-top: 10px">
-        <china-map />
-      </el-row>
-    </el-col>
-    <el-col :span="6">
-      <el-form :inline="true">
-        <el-form-item label="当前省份">
-          <el-select v-model="queryPram.provinceCode">
-            <el-option v-for="item in provinces" :key="item.key" :value="item.key" :label="item.value" />
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <el-row>
-        <ul>
-          <li>
-            累计确诊:{{ provinceConfirmed }}
-          </li>
-          <li style="margin-top: 10px">
-            累计死亡:{{ provinceDead }}
-          </li>
-          <li>
-            昨日新增：{{ dailyData.currentConfirmedCount }}
-          </li>
-          <li>
-            高风险地区：{{ dailyData.highDangerCount }}
-          </li>
-          <li>
-            中风险地区：{{ dailyData.midDangerCount }}
-          </li>
-        </ul>
-      </el-row>
-      <el-row>
-        <el-button>查看更多疫情统计数据</el-button>
-      </el-row>
-    </el-col>
+        </el-row>
+        <el-row>
+          <h3 style="color: #ef5610">
+            高风险地区
+          </h3>
+          <div v-for="(item,index) in riskarea.high" :key="index">
+            <a style="font-size: 14px">{{ item }}</a>
+          </div>
+        </el-row>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -94,7 +119,7 @@ import { mapGetters } from 'vuex'
 import ProvinceDaily from '@/views/dashboard/components/ProvinceDaily'
 import ChinaConfirmHistory from '@/views/dashboard/components/ChinaConfirmHistory'
 import ChinaMap from '@/views/dashboard/components/ChinaMap'
-import { getChinaCumulateInfo, getYourAddressInfo } from '@/api/china'
+import { getChinaCumulateInfo, getYourAddressInfo, getNewsList } from '@/api/china'
 
 export default {
   name: 'Dashboard',
@@ -153,7 +178,12 @@ export default {
         { key: 'NMG', value: '内蒙古' },
         { key: 'YN', value: '云南' },
         { key: 'SH', value: '上海' }
-      ]
+      ],
+      news: [],
+      riskarea: {
+        high: [],
+        mid: []
+      }
     }
   },
   computed: {
@@ -168,13 +198,45 @@ export default {
       this.deadCount = re.deadCount
     })
     getYourAddressInfo(this.queryPram).then(re => {
-      this.provinceConfirmed = re.rovinceConfirmed
+      this.provinceConfirmed = re.provinceConfirmed
       this.provinceDead = re.provinceDead
       this.dailyData = re.dailyData
     })
+    getNewsList().then(re => {
+      this.news = re.newslist[0].news
+      this.riskarea = re.newslist[0].riskarea
+    })
+  },
+  methods: {
+    sourceNew(url) {
+      window.open(url,'_blank')
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
+.dashboard-editor-container {
+  padding: 32px;
+  background-color: rgb(240, 242, 245);
+  position: relative;
 
+  .github-corner {
+    position: absolute;
+    top: 0px;
+    border: 0;
+    right: 0;
+  }
+
+  .chart-wrapper {
+    background: #fff;
+    padding: 16px 16px 0;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width:1024px) {
+  .chart-wrapper {
+    padding: 8px;
+  }
+}
 </style>

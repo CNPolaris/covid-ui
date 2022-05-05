@@ -64,3 +64,14 @@ export function getProvinceCurrent() {
     method: 'get',
   })
 }
+
+export function getNewsList() {
+  return request({
+    url: 'http://api.tianapi.com/ncov/index',
+    method: 'get',
+    params: {
+      key: 'f0dd3a4a8934df01dc80823cec4b1bea',
+      num: 20
+    }
+  })
+}
