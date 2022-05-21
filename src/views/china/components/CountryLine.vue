@@ -5,7 +5,7 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons')
-import { getChinaAll } from '@/api/china'
+import { getChinaAll, getChinaDailyList } from '@/api/china'
 
 export default {
   name: 'CountryLine',
@@ -38,7 +38,8 @@ export default {
       deadRate: [],
       deadIncreased: [],
       insickCount: [],
-      updateTime: []
+      updateTime: [],
+      chinaDayList: []
     }
   },
   mounted() {
@@ -59,20 +60,23 @@ export default {
   methods: {
     async initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-      await getChinaAll().then(re=> {
-        this.records = re.records
+      // await getChinaAll().then(re=> {
+      //   this.records = re.records
+      // })
+      await getChinaDailyList().then(re => {
+        this.chinaDayList = re.data.chinaDayList
       })
       const _this = this
-      for (let i = 0; i < this.records.length; i++) {
-        _this.updateTime.push(this.records[i].updateTime)
-        _this.confirmedCount.push(this.records[i].confirmedCount)
-        _this.confirmedIncreased.push(this.records[i].confirmedIncreased)
-        _this.curedCount.push(this.records[i].curedCount)
-        _this.curedRate.push(this.records[i].curedRate)
-        _this.deadCount.push(this.records[i].deadCount)
-        _this.deadRate.push(this.records[i].deadRate)
-        _this.deadIncreased.push(this.records[i].deadIncreased)
-        _this.insickCount.push(this.records[i].insickCount)
+      for (let i = 0; i < this.chinaDayList.length; i++) {
+        _this.updateTime.push(this.chinaDayList[i].date)
+        _this.confirmedCount.push(this.chinaDayList[i].confirme)
+        // _this.confirmedIncreased.push(this.chinaDayList[i].nowConfirm)
+        _this.curedCount.push(this.chinaDayList[i].heal)
+        _this.curedRate.push(this.chinaDayList[i].healRate)
+        _this.deadCount.push(this.chinaDayList[i].dead)
+        _this.deadRate.push(this.chinaDayList[i].deadRate)
+        // _this.deadIncreased.push(this.chinaDayList[i].deadIncreased)
+        _this.insickCount.push(this.chinaDayList[i].localConfirm)
       }
       this.chart.setOption({
         title: {
@@ -90,7 +94,7 @@ export default {
         },
         legend: {
           left: 'right',
-          data: ['累计确诊','累计治愈','累计死亡','治愈率','死亡率','现存确诊','新增确诊','新增死亡',]
+          data: ['累计确诊','累计治愈','累计死亡','治愈率','死亡率','现存确诊','新增确诊']
         },
         xAxis: {
           type: 'category',
@@ -161,12 +165,12 @@ export default {
             name: '新增确诊',
             type: 'line',
             data: this.confirmedIncreased
-          },
-          {
-            name: '新增死亡',
-            type: 'line',
-            data: this.deadIncreased
           }
+          // {
+          //   name: '新增死亡',
+          //   type: 'line',
+          //   data: this.deadIncreased
+          // }
         ]
       })
     }

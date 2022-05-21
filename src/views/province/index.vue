@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import { getProvinceAll } from '@/api/china'
+import { getProvinceAll, getProvinceData } from '@/api/china'
 import echarts from 'echarts'
 export default {
   name: 'Province',
@@ -234,132 +234,139 @@ export default {
     getProvinceAll().then(re => {
       const provinces = re.provinces
       for(let i = 0; i < provinces.length; i++) {
-        let records = provinces[i].records
+        // let records = provinces[i].records
         let provinceName = provinces[i].provinceName
-        _this.confirmedCount = []
-        _this.confirmedIncreased = []
-        _this.curedCount = []
-        _this.curedRate = []
-        _this.deadCount = []
-        _this.deadIncreased = []
-        _this.deadRate = []
-        _this.insickCount = []
-        _this.updateTime = []
-        for (let j = 0; j < records.length; j++) {
-          _this.confirmedCount.push(records[j].confirmedCount)
-          _this.confirmedIncreased.push(records[j].confirmedIncreased)
-          _this.curedCount.push(records[j].curedCount)
-          _this.curedRate.push(Math.round(records[j].curedCount / records[j].confirmedCount * 10000) / 100.00 + '%')
-          _this.deadCount.push(records[j].deadCount)
-          _this.deadIncreased.push(records[j].deadIncreased)
-          _this.deadRate.push(Math.round(records[j].deadCount / records[j].confirmedCount * 10000) / 100.00 + '%')
-          _this.insickCount.push(records[j].insickCount)
-          _this.updateTime.push(records[j].updateTime)
-        }
-        switch (provinceName) {
-          case '香港':
-            _this.echartsXGAction.setOption(this.option('香港',_this.updateTime))
-            break
-          case '黑龙江':
-            _this.echartsHLJAction.setOption(this.option('黑龙江',_this.updateTime))
-            break
-          case '青海':
-            _this.echartsQHAction.setOption(this.option('青海',_this.updateTime))
-            break
-          case '陕西':
-            _this.echartsSXAction.setOption(this.option('陕西', _this.updateTime))
-            break
-          case '重庆':
-            _this.echartsCQAction.setOption(this.option('重庆', _this.updateTime))
-            break
-          case '辽宁':
-            _this.echartsLNAction.setOption(this.option('辽宁', _this.updateTime))
-            break
-          case '贵州':
-            _this.echartsGZAction.setOption(this.option('贵州', _this.updateTime))
-            break
-          case '西藏':
-            _this.echartsXZAction.setOption(this.option('西藏',_this.updateTime))
-            break
-          case '福建':
-            _this.echartsFJAction.setOption(this.option('福建',_this.updateTime))
-            break
-          case '甘肃':
-            _this.echartsGSAction.setOption(this.option('甘肃',_this.updateTime))
-            break
-          case '澳门':
-            _this.echartsAMAction.setOption(this.option('澳门',_this.updateTime))
-            break
-          case '湖南':
-            _this.echartsHNAction.setOption(this.option('湖南',_this.updateTime))
-            break
-          case '湖北':
-            _this.echartsHBAction.setOption(this.option('湖北',_this.updateTime))
-            break
-          case '海南':
-            _this.echartsHN2Action.setOption(this.option('海南',_this.updateTime))
-            break
-          case '浙江':
-            _this.echartsZJAction.setOption(this.option('浙江',_this.updateTime))
-            break
-          case '河南':
-            _this.echartsHN1Action.setOption(this.option('河南',_this.updateTime))
-            break
-          case '河北':
-            _this.echartsHB1Action.setOption(this.option('河北',_this.updateTime))
-            break
-          case '江西':
-            _this.echartsJXAction.setOption(this.option('江西',_this.updateTime))
-            break
-          case '江苏':
-            _this.echartsJSAction.setOption(this.option('江苏',_this.updateTime))
-            break
-          case '新疆':
-            _this.echartsXJAction.setOption(this.option('新疆',_this.updateTime))
-            break
-          case '广西':
-            _this.echartsGXAction.setOption(this.option('广西',_this.updateTime))
-            break
-          case '广东':
-            _this.echartsGDAction.setOption(this.option('广东',_this.updateTime))
-            break
-          case '山西':
-            _this.echartsSX1Action.setOption(this.option('山西',_this.updateTime))
-            break
-          case '山东':
-            _this.echartsSDAction.setOption(this.option('山东',_this.updateTime))
-            break
-          case '安徽':
-            _this.echartsAHAction.setOption(this.option('安徽',_this.updateTime))
-            break
-          case '宁夏':
-            _this.echartsNXAction.setOption(this.option('宁夏',_this.updateTime))
-            break
-          case '天津':
-            _this.echartsTJAction.setOption(this.option('天津',_this.updateTime))
-            break
-          case '四川':
-            _this.echartsSCAction.setOption(this.option('四川',_this.updateTime))
-            break
-          case '吉林':
-            _this.echartsJLAction.setOption(this.option('吉林',_this.updateTime))
-            break
-          case '台湾':
-            _this.echartsTWAction.setOption(this.option('台湾',_this.updateTime))
-            break
-          case '北京':
-            _this.echartsBJAction.setOption(this.option('北京',_this.updateTime))
-            break
-          case '内蒙古':
-            _this.echartsNMGAction.setOption(this.option('内蒙古',_this.updateTime))
-            break
-          case '云南':
-            _this.echartsYNAction.setOption(this.option('云南',_this.updateTime))
-            break
-          case '上海':
-            _this.echartsSHAction.setOption(this.option('上海',_this.updateTime))
-            break
-        }
+        let confirmedCount = []
+        let confirmedIncreased = []
+        let curedCount = []
+        let curedRate = []
+        let deadCount = []
+        let deadIncreased = []
+        let deadRate = []
+        let updateTime = []
+        getProvinceData(provinceName).then(re => {
+          for (let j=0; j < re.data.length; j++) {
+            updateTime.push(re.data[j].date)
+            // 累计确诊
+            confirmedCount.push(re.data[j].confirm)
+            // 累计死亡
+            deadCount.push(re.data[j].dead)
+            // 新增死亡
+            deadIncreased.push(re.data[j].newDead)
+            // 累计治愈
+            curedCount.push(re.data[j].heal)
+            // 新增确诊
+            confirmedIncreased.push(re.data[j].newConfirm)
+            // 治愈率
+            curedRate.push(Math.round(re.data[j].heal / re.data[j].confirm * 10000) / 100.00 + '%')
+            // 死亡率
+            deadRate.push(Math.round(re.data[j].dead / re.data[j].confirm * 10000) / 100.00 + '%')
+          }
+          switch (provinceName) {
+            case '香港':
+              _this.echartsXGAction.setOption(this.option('香港',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '黑龙江':
+              _this.echartsHLJAction.setOption(this.option('黑龙江',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '青海':
+              _this.echartsQHAction.setOption(this.option('青海',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '陕西':
+              _this.echartsSXAction.setOption(this.option('陕西', updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '重庆':
+              _this.echartsCQAction.setOption(this.option('重庆',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '辽宁':
+              _this.echartsLNAction.setOption(this.option('辽宁', updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '贵州':
+              _this.echartsGZAction.setOption(this.option('贵州', updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '西藏':
+              _this.echartsXZAction.setOption(this.option('西藏',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '福建':
+              _this.echartsFJAction.setOption(this.option('福建',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '甘肃':
+              _this.echartsGSAction.setOption(this.option('甘肃',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '澳门':
+              _this.echartsAMAction.setOption(this.option('澳门',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '湖南':
+              _this.echartsHNAction.setOption(this.option('湖南',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '湖北':
+              _this.echartsHBAction.setOption(this.option('湖北',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '海南':
+              _this.echartsHN2Action.setOption(this.option('海南',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '浙江':
+              _this.echartsZJAction.setOption(this.option('浙江',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '河南':
+              _this.echartsHN1Action.setOption(this.option('河南',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '河北':
+              _this.echartsHB1Action.setOption(this.option('河北',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '江西':
+              _this.echartsJXAction.setOption(this.option('江西',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '江苏':
+              _this.echartsJSAction.setOption(this.option('江苏',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '新疆':
+              _this.echartsXJAction.setOption(this.option('新疆',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '广西':
+              _this.echartsGXAction.setOption(this.option('广西',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '广东':
+              _this.echartsGDAction.setOption(this.option('广东',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '山西':
+              _this.echartsSX1Action.setOption(this.option('山西',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '山东':
+              _this.echartsSDAction.setOption(this.option('山东',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '安徽':
+              _this.echartsAHAction.setOption(this.option('安徽',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '宁夏':
+              _this.echartsNXAction.setOption(this.option('宁夏',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '天津':
+              _this.echartsTJAction.setOption(this.option('天津',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '四川':
+              _this.echartsSCAction.setOption(this.option('四川',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '吉林':
+              _this.echartsJLAction.setOption(this.option('吉林',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '台湾':
+              _this.echartsTWAction.setOption(this.option('台湾',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '北京':
+              _this.echartsBJAction.setOption(this.option('北京',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '内蒙古':
+              _this.echartsNMGAction.setOption(this.option('内蒙古',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '云南':
+              _this.echartsYNAction.setOption(this.option('云南',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+            case '上海':
+              _this.echartsSHAction.setOption(this.option('上海',updateTime,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate))
+              break
+          }
+        })
       }
     })
     setTimeout(() => {
@@ -367,7 +374,7 @@ export default {
     }, 1000*5)
   },
   methods: {
-    option(title, label) {
+    option(title, label,confirmedCount,deadCount,deadIncreased,curedCount,confirmedIncreased,curedRate,deadRate) {
       return {
         title: {
           text: title,
@@ -425,37 +432,37 @@ export default {
           {
             name: '累计确诊',
             type: 'line',
-            data: this.confirmedCount
+            data: confirmedCount
           },
           {
             name: '新增确诊',
             type: 'line',
-            data: this.confirmedIncreased
+            data: confirmedIncreased
           },
           {
             name: '累计死亡',
             type: 'bar',
-            data: this.deadCount
+            data: deadCount
           },
           {
             name: '新增死亡',
             type: 'line',
-            data: this.deadIncreased
+            data: deadIncreased
           },
           {
             name: '死亡率',
             type: 'line',
-            data: this.deadRate
+            data: deadRate
           },
           {
             name: '治愈率',
             type: 'line',
-            data: this.curedRate
+            data: curedRate
           },
           {
             name: '治愈病例',
             type: 'line',
-            data: this.curedCount
+            data: curedCount
           }
         ]
       }

@@ -82,3 +82,10 @@ export function getChinaDailyList() {
     method: 'post'
   })
 }
+
+export function getProvinceData(name) {
+  return request({
+    url: 'https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province=' + name + '&limit=60&',
+    method: 'post'
+  })
+}
